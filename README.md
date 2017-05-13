@@ -10,5 +10,23 @@ The following `README.md` is to consolidate the key learning points for future r
 The tutorial can be found [here](https://www.udemy.com/react-redux/)
 
 ## Key Learning Points
-State Structure
-- Use objects to hold data
+#### State Structure
+- Use objects over arrays to store data.
+- Allows ease of access to specific data set.
+- Ex. using the lodash library:
+```js
+export default function(state = {}, action) {
+  switch (action.type) {
+    case FETCH_POSTS:
+      return _.mapKeys(action.payload.data, 'id');
+    default:
+      return state;
+  }
+}
+```
+
+#### Injection action creator shortcut
+- If an object is passed, each function inside it is assumed to be a Redux action creator.
+```js
+connect(mapStateToProps, { fetchPosts })(PostsIndex);
+```
